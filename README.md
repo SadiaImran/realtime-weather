@@ -1,16 +1,36 @@
-# weather_app
+## 🌦 Real-Time Weather App 🌍  
 
-A new Flutter project.
+This is a **cross-platform** real-time weather application built with **Flutter**. It provides **instant weather updates** for any location entered by the user. The app fetches **live weather data** from an API and displays details such as **temperature, humidity, wind speed, precipitation, UV index, and more** in a clean and intuitive UI.  
 
-## Getting Started
+### **Key Features**  
+✅ Search for any location and get real-time weather updates 🌍  
+✅ Beautiful **gradient UI** with weather details 📊  
+✅ Displays **temperature, wind speed, humidity, and more** 🌡️  
+✅ Supports **iOS, Android, macOS, Windows, and Linux** 📱💻  
+✅ Fetches data from a **reliable weather API** ⛅  
+✅ Responsive layout for **different screen sizes** 📏  
 
-This project is a starting point for a Flutter application.
+### **Tech Stack**  
+- **Flutter** (Dart)  
+- **Provider / Riverpod (State Management)**  
+- **REST API Integration**  
+- **Material Design UI**  
 
-A few resources to get you started if this is your first Flutter project:
+### **Getting Started**  
+1️⃣ Clone the repository:  
+   ```sh
+   git clone https://github.com/SadiaImran/realtime-weather.git
+   cd realtime-weather
+   ```  
+2️⃣ Install dependencies:  
+   ```sh
+   flutter pub get
+   ```  
+3️⃣ Run the app:  
+   ```sh
+   flutter run
+   ```  
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+🔗 **Live Demo (if available)**  
+📌 **API Used:** [WeatherAPI](https://www.weatherapi.com/) 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

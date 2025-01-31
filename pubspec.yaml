@@ -86,7 +86,7 @@ flutter:
         
     - family: GillSansMT
       fonts:
-        - asset: assets/fonts/gil-sans-mt.TTF
+        - asset: assets/fonts/gil-sans-mt.ttf
         
     - family: SFUIDisplay
       fonts:

@@ -79,28 +79,27 @@ flutter:
     - family: sf-ui-display-regular
       fonts:
         - asset: assets/fonts/sf-ui-display-regular.otf
-
+        
     - family: Abel
       fonts:
         - asset: assets/fonts/Abel-Regular.ttf
         
     - family: GillSansMT
       fonts:
-        - asset : assets/fonts/gil-sans-mt.ttf
+        - asset: assets/fonts/gil-sans-mt.TTF
         
     - family: SFUIDisplay
       fonts:
-        - asset : assets/fonts/SF-UI-Display-Semibold.ttf
+        - asset: assets/fonts/SF-UI-Display-Semibold.ttf
 
     - family: Poppins
       fonts:
-        - asset : assets/fonts/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
 
     - family: Poppins
       fonts:
-        - asset : assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Regular.ttf
     
     - family: Poppins
       fonts:
-        - asset : assets/fonts/Poppins-SemiBold.ttf
-    
+        - asset: assets/fonts/Poppins-SemiBold.ttf

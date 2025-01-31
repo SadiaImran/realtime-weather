@@ -29,6 +29,8 @@ class _ScreenSearchState extends State<ScreenSearch> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        width: double.infinity, 
+        height : double.infinity,
         decoration: const BoxDecoration(
             gradient: LinearGradient(
                 colors: [AppColors.primaryBlue, AppColors.secondaryBlue],

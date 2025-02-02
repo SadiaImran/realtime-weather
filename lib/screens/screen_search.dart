@@ -18,7 +18,7 @@ class _ScreenSearchState extends State<ScreenSearch> {
   List<String> imagePath = [
     "assets/images/icon-humidity.png",
     "assets/images/icon-wind.png"
-  ] ;
+  ];
 
   @override
   void initState() {
@@ -27,16 +27,20 @@ class _ScreenSearchState extends State<ScreenSearch> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Container(
-        width: double.infinity, 
-        height : double.infinity,
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                colors: [AppColors.primaryBlue, AppColors.secondaryBlue],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.7, 1.0])),
+          gradient: LinearGradient(
+            colors: [AppColors.primaryBlue, AppColors.secondaryBlue],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0.7, 1.0],
+          ),
+        ),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(40.0),
@@ -44,11 +48,11 @@ class _ScreenSearchState extends State<ScreenSearch> {
               child: Column(
                 children: [
                   _buildSearchWidget(),
-                  SizedBox(height: 50),
+                  const SizedBox(height: 50),
                   if (inProgress)
-                    CircularProgressIndicator()
+                    const CircularProgressIndicator()
                   else
-                    _buildWeatherWidget(),
+                    _buildWeatherWidget(screenWidth),
                 ],
               ),
             ),
@@ -66,10 +70,14 @@ class _ScreenSearchState extends State<ScreenSearch> {
       },
     );
   }
-  Widget _buildWeatherWidget() {
+
+  Widget _buildWeatherWidget(double screenWidth) {
     if (response == null) {
       return Text(message);
     } else {
+      double locationFontSize = screenWidth < 380 ? 22 : 28;
+      double countryFontSize = screenWidth < 380 ? 18 : 24;
+
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -83,23 +91,23 @@ class _ScreenSearchState extends State<ScreenSearch> {
                 color: AppColors.darkText,
                 size: 38,
               ),
-              SizedBox(width: 15),
+              const SizedBox(width: 15),
               Text(
                 response?.location?.name ?? "",
-                style: const TextStyle(
-                  fontSize: 32,
+                style: TextStyle(
+                  fontSize: locationFontSize,
                   fontWeight: FontWeight.w300,
                   color: AppColors.darkText,
                 ),
               ),
               Text(
                 " , ${response?.location?.country ?? ""}",
-                style: const TextStyle(
-                  fontSize: 28,
+                style: TextStyle(
+                  fontSize: countryFontSize,
                   fontWeight: FontWeight.w300,
                   color: AppColors.darkText,
                 ),
-              )
+              ),
             ],
           ),
           const SizedBox(height: 20),
@@ -108,8 +116,7 @@ class _ScreenSearchState extends State<ScreenSearch> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding:
-                    EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
+                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: AppColors.darkText,
@@ -144,20 +151,21 @@ class _ScreenSearchState extends State<ScreenSearch> {
             ],
           ),
           Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: SizedBox(
-                    height: 200,
-                    child: Image.network(
-                      "https:${response?.current?.condition?.icon}"
-                          .replaceAll("64x64", "128x128"),
-                      scale: 0.7,
-                    ),
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: SizedBox(
+                  height: 200,
+                  child: Image.network(
+                    "https:${response?.current?.condition?.icon}"
+                        .replaceAll("64x64", "128x128"),
+                    scale: 0.7,
                   ),
                 ),
-              ]),
+              ),
+            ],
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -181,12 +189,12 @@ class _ScreenSearchState extends State<ScreenSearch> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _dataAndTitleWidget(imagePath[0],"Humidity",
-                        response?.current?.humidity?.toString() ?? ""),
-                    _dataAndTitleWidget(imagePath[1],"Wind Speed",
-                        "${response?.current?.windKph?.toString() ?? ""} km/h"),
-                       _dataAndTitleWidget(imagePath[0],"Percipitation",
-                        "${response?.current?.precipMm?.toString() ?? ""} Mm") 
+                    _dataAndTitleWidget(imagePath[0], "Humidity",
+                        response?.current?.humidity?.toString() ?? "", screenWidth),
+                    _dataAndTitleWidget(imagePath[1], "Wind Speed",
+                        "${response?.current?.windKph?.toString() ?? ""} km/h", screenWidth),
+                    _dataAndTitleWidget(imagePath[0], "Percipitation",
+                        "${response?.current?.precipMm?.toString() ?? ""} Mm", screenWidth)
                   ],
                 ),
               ],
@@ -197,29 +205,31 @@ class _ScreenSearchState extends State<ScreenSearch> {
     }
   }
 
-  Widget _dataAndTitleWidget(String imgPath,String title, String data) {
+  Widget _dataAndTitleWidget(String imgPath, String title, String data, double screenWidth) {
+    double imageSize = screenWidth < 380 ? 25 : 35;
+    double fontSize = screenWidth < 380 ? 14 : 24;
+    double titleFontSize = screenWidth < 380 ? 10 : 18;
+
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: Column(
         children: [
-          Image(image: AssetImage(imgPath))
-          ,
-          
+          Image(image: AssetImage(imgPath), height: imageSize),
           const SizedBox(height: 10),
           Text(
             data,
-            style: const TextStyle(
-              fontSize: 24,
-              color: AppColors.secondaryBlue ,
+            style: TextStyle(
+              fontSize: fontSize,
+              color: AppColors.secondaryBlue,
               fontWeight: FontWeight.w600,
             ),
           ),
           Text(
             title,
-            style: const TextStyle(
-              color: AppColors.secondaryBlue ,
+            style: TextStyle(
+              color: AppColors.secondaryBlue,
               fontWeight: FontWeight.bold,
-              fontSize: 18,
+              fontSize: titleFontSize,
             ),
           ),
         ],
@@ -246,7 +256,9 @@ class _ScreenSearchState extends State<ScreenSearch> {
 
     try {
       DateTime parsedDate = DateTime.parse(localtime);
-      return DateFormat("MMM d yyyy").format(parsedDate);
+      String ans =
+          "${response?.location?.localtime?.toString().split(" ").last ?? ""} , ${DateFormat("MMM d yyyy").format(parsedDate)}";
+      return ans;
     } catch (e) {
       return "Invalid Date";
     }

@@ -3,6 +3,7 @@ import 'package:weather_app/app/colors.dart';
 import '../modules/module_weather_model.dart';
 import '../modules/module_weather_api.dart';
 import 'package:intl/intl.dart';
+import '../modules/module_responsive_handler.dart';
 
 class ScreenSearch extends StatefulWidget {
   const ScreenSearch({super.key});
@@ -27,8 +28,6 @@ class _ScreenSearchState extends State<ScreenSearch> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -52,7 +51,7 @@ class _ScreenSearchState extends State<ScreenSearch> {
                   if (inProgress)
                     const CircularProgressIndicator()
                   else
-                    _buildWeatherWidget(screenWidth),
+                    _buildWeatherWidget(context),
                 ],
               ),
             ),
@@ -71,12 +70,12 @@ class _ScreenSearchState extends State<ScreenSearch> {
     );
   }
 
-  Widget _buildWeatherWidget(double screenWidth) {
+  Widget _buildWeatherWidget(BuildContext context) {
     if (response == null) {
       return Text(message);
     } else {
-      double locationFontSize = screenWidth < 380 ? 22 : 28;
-      double countryFontSize = screenWidth < 380 ? 18 : 24;
+      double locationFontSize = Responsive.width(context, 56);
+      double countryFontSize = Responsive.width(context, 48);
 
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -116,7 +115,8 @@ class _ScreenSearchState extends State<ScreenSearch> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: AppColors.darkText,
@@ -189,12 +189,21 @@ class _ScreenSearchState extends State<ScreenSearch> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _dataAndTitleWidget(imagePath[0], "Humidity",
-                        response?.current?.humidity?.toString() ?? "", screenWidth),
-                    _dataAndTitleWidget(imagePath[1], "Wind Speed",
-                        "${response?.current?.windKph?.toString() ?? ""} km/h", screenWidth),
-                    _dataAndTitleWidget(imagePath[0], "Percipitation",
-                        "${response?.current?.precipMm?.toString() ?? ""} Mm", screenWidth)
+                    _dataAndTitleWidget(
+                        imagePath[0],
+                        "Humidity",
+                        response?.current?.humidity?.toString() ?? "",
+                        context),
+                    _dataAndTitleWidget(
+                        imagePath[1],
+                        "Wind Speed",
+                        "${response?.current?.windKph?.toString() ?? ""} km/h",
+                        context),
+                    _dataAndTitleWidget(
+                        imagePath[0],
+                        "Percipitation",
+                        "${response?.current?.precipMm?.toString() ?? ""} Mm",
+                        context)
                   ],
                 ),
               ],
@@ -205,10 +214,11 @@ class _ScreenSearchState extends State<ScreenSearch> {
     }
   }
 
-  Widget _dataAndTitleWidget(String imgPath, String title, String data, double screenWidth) {
-    double imageSize = screenWidth < 380 ? 25 : 35;
-    double fontSize = screenWidth < 380 ? 14 : 24;
-    double titleFontSize = screenWidth < 380 ? 10 : 18;
+  Widget _dataAndTitleWidget(
+      String imgPath, String title, String data, BuildContext context) {
+    double imageSize = Responsive.width(context, 25);
+    double fontSize = Responsive.width(context, 14);
+    double titleFontSize = Responsive.width(context, 10);
 
     return Padding(
       padding: const EdgeInsets.all(18.0),

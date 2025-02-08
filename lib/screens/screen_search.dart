@@ -4,6 +4,7 @@ import '../modules/module_weather_model.dart';
 import '../modules/module_weather_api.dart';
 import 'package:intl/intl.dart';
 import '../modules/module_responsive_handler.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScreenSearch extends StatefulWidget {
   const ScreenSearch({super.key});
@@ -15,7 +16,6 @@ class ScreenSearch extends StatefulWidget {
 class _ScreenSearchState extends State<ScreenSearch> {
   ApiResponse? response;
   bool inProgress = false;
-  String message = "Search for the location";
   List<String> imagePath = [
     "assets/images/icon-humidity.png",
     "assets/images/icon-wind.png"
@@ -24,6 +24,7 @@ class _ScreenSearchState extends State<ScreenSearch> {
   @override
   void initState() {
     super.initState();
+   
   }
 
   @override
@@ -63,7 +64,7 @@ class _ScreenSearchState extends State<ScreenSearch> {
 
   Widget _buildSearchWidget() {
     return SearchBar(
-      hintText: "Search any location",
+      hintText: AppLocalizations.of(context)!.searchAnyLocation,
       onSubmitted: (value) {
         _getWeatherData(value);
       },
@@ -72,10 +73,10 @@ class _ScreenSearchState extends State<ScreenSearch> {
 
   Widget _buildWeatherWidget(BuildContext context) {
     if (response == null) {
-      return Text(message);
+      return Text(AppLocalizations.of(context)!.searchForTheLocation);
     } else {
-      double locationFontSize = Responsive.width(context, 56);
-      double countryFontSize = Responsive.width(context, 48);
+      double locationFontSize = Responsive.avg(context, 56);
+      double countryFontSize = Responsive.avg(context, 48);
 
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -171,8 +172,8 @@ class _ScreenSearchState extends State<ScreenSearch> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                (response?.current?.condition?.text.toString() ?? ""),
-                style: const TextStyle(
+                translateWeatherCondition(response?.current?.condition?.text.toString() ?? "", context),
+              style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w700,
                   color: AppColors.darkText,
@@ -191,17 +192,17 @@ class _ScreenSearchState extends State<ScreenSearch> {
                   children: [
                     _dataAndTitleWidget(
                         imagePath[0],
-                        "Humidity",
+                        AppLocalizations.of(context)!.humidity,
                         response?.current?.humidity?.toString() ?? "",
                         context),
                     _dataAndTitleWidget(
                         imagePath[1],
-                        "Wind Speed",
+                        AppLocalizations.of(context)!.windSpeed,
                         "${response?.current?.windKph?.toString() ?? ""} km/h",
                         context),
                     _dataAndTitleWidget(
                         imagePath[0],
-                        "Percipitation",
+                        AppLocalizations.of(context)!.preciptation,
                         "${response?.current?.precipMm?.toString() ?? ""} Mm",
                         context)
                   ],
@@ -216,15 +217,15 @@ class _ScreenSearchState extends State<ScreenSearch> {
 
   Widget _dataAndTitleWidget(
       String imgPath, String title, String data, BuildContext context) {
-    double imageSize = Responsive.width(context, 25);
-    double fontSize = Responsive.width(context, 14);
-    double titleFontSize = Responsive.width(context, 10);
+    double imageSize = Responsive.avg(context, 45); 
+    double fontSize = Responsive.avg(context, 28);
+    double titleFontSize = Responsive.avg(context, 18);
 
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: Column(
         children: [
-          Image(image: AssetImage(imgPath), height: imageSize),
+          Image(image: AssetImage(imgPath) , width: imageSize, height: imageSize),
           const SizedBox(height: 10),
           Text(
             data,
@@ -273,4 +274,37 @@ class _ScreenSearchState extends State<ScreenSearch> {
       return "Invalid Date";
     }
   }
+
+  String translateWeatherCondition(String condition, BuildContext context) {
+  switch (condition.toLowerCase()) {
+    case 'partly cloudy':
+      return AppLocalizations.of(context)!.partlyCloudy;
+    case 'overcast':
+      return AppLocalizations.of(context)!.overcast;
+    case 'rain':
+      return AppLocalizations.of(context)!.rain;
+    case 'moist':
+      return AppLocalizations.of(context)!.moist;
+    case 'light rain':
+      return AppLocalizations.of(context)!.lightRain;
+    case 'clear':
+      return AppLocalizations.of(context)!.clear;
+    case 'sunny':
+      return AppLocalizations.of(context)!.sunny;
+    case 'mist':
+      return AppLocalizations.of(context)!.mist;
+    case 'heavy rain':
+      return AppLocalizations.of(context)!.heavyRain;
+    case 'snow':
+      return AppLocalizations.of(context)!.snow;
+    case 'quite cloudy':
+      return AppLocalizations.of(context)!.quiteCloudy;
+    case 'fog':
+      return AppLocalizations.of(context)!.fog;
+    case 'thunderstorm':
+      return AppLocalizations.of(context)!.thunderstorm;
+    default:
+      return condition;
+  }
+}
 }

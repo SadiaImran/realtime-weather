@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../app/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScreenSplash extends StatefulWidget {
   const ScreenSplash({super.key});
@@ -23,11 +24,11 @@ class _SplashScreenState extends State<ScreenSplash> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.primaryBlue,
       body: Center(
         child: Text(
-          'Weather App',
+          AppLocalizations.of(context)!.weatherApp,
           style: TextStyle(
             color: AppColors.lightGrey,
             fontFamily: 'Geometr415', 

@@ -3,7 +3,7 @@ import 'package:weather_app/app/colors.dart';
 import '../modules/module_weather_model.dart';
 import '../modules/module_weather_api.dart';
 import 'package:intl/intl.dart';
-import '../modules/module_responsive_handler.dart';
+import '../modules/responsive-handler/responsive-handler.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ScreenSearch extends StatefulWidget {

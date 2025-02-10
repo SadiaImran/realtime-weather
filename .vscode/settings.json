@@ -1,5 +1,6 @@
 {
     "cmake.ignoreCMakeListsMissing": true,
     "dart.flutterHotReloadOnSave": "all",
-    "dart.hotReloadOnSave": "all"
+    "dart.hotReloadOnSave": "all",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

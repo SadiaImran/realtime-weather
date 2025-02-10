@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app/modules/module_provider.dart';  
+import 'package:weather_app/modules/translator/translator.dart';  
 import './app/routes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -18,10 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
 
-      supportedLocales: const [
-        Locale('en','US'),
-        Locale('es','ES'),
-      ] ,
+      supportedLocales: LanguageProvider.languages.map((e) => Locale(e['locale'])).toList(),
       locale: context.watch<LanguageProvider>().selectedLocale,
       localizationsDelegates: [
         AppLocalizations.delegate ,

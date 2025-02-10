@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../screens/screen_home.dart';
-import '../screens/screen_search.dart';
-import '../screens/screen_splash.dart';
+import '../screens/screen-home.dart';
+import '../screens/screen-search.dart';
+import '../screens/screen-splash.dart';
 
 class AppRoutes {
   // Route map

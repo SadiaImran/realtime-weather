@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app/modules/module_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weather_app/modules/translator/translator.dart';
 import '../app/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -119,11 +120,11 @@ class _ScreenHomeState extends State<ScreenHome> {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                onTap: () {
-                                  final provider = context.read<LanguageProvider>();
-                                  provider.changeLanguage(LanguageProvider.languages[index]['locale']);
-                                  Navigator.pop(context); 
-                                },
+                                onTap: () async {
+                                    final provider = context.read<LanguageProvider>();
+                                    provider.changeLanguage(LanguageProvider.languages[index]['locale']);
+                                    Navigator.pop(context);
+                                  },
                               );
                             },
                           ),

@@ -31,6 +31,6 @@ This is a **cross-platform** real-time weather application built with **Flutter*
    flutter run
    ```  
 
-🔗 **Live Demo (if available)**  [WeatherApp](https://sadiaimran.github.io/realtime-weather-demo/)
+🔗 **Live Demo**  [WeatherApp](https://sadiaimran.github.io/realtime-weather-demo/)
 📌 **API Used:** [WeatherAPI](https://www.weatherapi.com/) 
 
